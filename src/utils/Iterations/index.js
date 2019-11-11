@@ -60,6 +60,44 @@ const getChildren = (child, iteration, keepDataAttributes) => {
         return getChild(child, executedChild, keepDataAttributes);
       });
     }
+  } else {
+    if (Array.isArray(iteration)) {
+      return iteration.map(() => {
+        let executedChild = children;
+        
+        if (executedChild.props && executedChild.props.children) {
+          executedChild = getExecutedChildren(
+            executedChild,
+            keepDataAttributes
+          );
+        }
+        return getChild(child, executedChild, keepDataAttributes);
+      });
+    } else if (typeof iteration === 'number' && !isNaN(iteration)) {
+      return Array(iteration)
+        .fill()
+        .map(() => {
+          let executedChild = children;
+          if (executedChild.props && executedChild.props.children) {
+            executedChild = getExecutedChildren(
+              executedChild,
+              keepDataAttributes
+            );
+          }
+          return getChild(child, executedChild, keepDataAttributes);
+        });
+    } else if (typeof iteration === 'object') {
+      Object.keys(iteration).map(() => {
+        let executedChild = children;
+        if (executedChild.props && executedChild.props.children) {
+          executedChild = getExecutedChildren(
+            executedChild,
+            keepDataAttributes
+          );
+        }
+        return getChild(child, executedChild, keepDataAttributes);
+      });
+    }
   }
 
   return child;

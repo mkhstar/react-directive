@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-
 import ReactDirective from 'react-directive';
 
 export default class App extends Component {
@@ -38,7 +37,8 @@ export default class App extends Component {
             </p>
             <ul>
               <li data-react-for={['pineapple', 'pear']}>
-                {(val, index) => val}
+                Repeat this twice
+                <span data-react-for={2}>3 times</span>
               </li>
             </ul>
             <p data-react-for={['pineapple', 'pear']}>
