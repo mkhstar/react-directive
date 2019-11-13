@@ -62,17 +62,6 @@ const getChildren = (child, iteration, keepDataAttributes) => {
     }
   } else {
     const childIterations = [];
-    // if (Array.isArray(iteration)) {
-    //   iteration.forEach(() => childIterations.push(children));
-    // } else if (typeof iteration === 'number') {
-    //   for (let x = 1; x <= iteration; x++) {
-    //     childIterations.push(children);
-    //   }
-    // } else if (typeof iteration === 'object') {
-    //   for (let x = 1; x <= Object.keys(iteration); x++) {
-    //     childIterations.push(children);
-    //   }
-    // }
     const childPassed = {
       ...child,
       props: {
