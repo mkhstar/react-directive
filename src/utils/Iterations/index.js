@@ -61,43 +61,42 @@ const getChildren = (child, iteration, keepDataAttributes) => {
       });
     }
   } else {
+    const childIterations = [];
+    // if (Array.isArray(iteration)) {
+    //   iteration.forEach(() => childIterations.push(children));
+    // } else if (typeof iteration === 'number') {
+    //   for (let x = 1; x <= iteration; x++) {
+    //     childIterations.push(children);
+    //   }
+    // } else if (typeof iteration === 'object') {
+    //   for (let x = 1; x <= Object.keys(iteration); x++) {
+    //     childIterations.push(children);
+    //   }
+    // }
+    const childPassed = {
+      ...child,
+      props: {
+        ...child.props,
+        'data-react-for':
+          child.props['data-react-for'] && keepDataAttributes
+            ? child.props['data-react-for']
+            : undefined,
+        children: iterations(childIterations.length ? childIterations : children, keepDataAttributes)
+      }
+    };
+    const childrenPassed = [];
     if (Array.isArray(iteration)) {
-      return iteration.map(() => {
-        let executedChild = children;
-        
-        if (executedChild.props && executedChild.props.children) {
-          executedChild = getExecutedChildren(
-            executedChild,
-            keepDataAttributes
-          );
-        }
-        return getChild(child, executedChild, keepDataAttributes);
-      });
-    } else if (typeof iteration === 'number' && !isNaN(iteration)) {
-      return Array(iteration)
-        .fill()
-        .map(() => {
-          let executedChild = children;
-          if (executedChild.props && executedChild.props.children) {
-            executedChild = getExecutedChildren(
-              executedChild,
-              keepDataAttributes
-            );
-          }
-          return getChild(child, executedChild, keepDataAttributes);
-        });
+      iteration.forEach(() => childrenPassed.push(childPassed));
+    } else if (typeof iteration === 'number') {
+      for (let x = 1; x <= iteration; x++) {
+        childrenPassed.push(childPassed)
+      }
     } else if (typeof iteration === 'object') {
-      Object.keys(iteration).map(() => {
-        let executedChild = children;
-        if (executedChild.props && executedChild.props.children) {
-          executedChild = getExecutedChildren(
-            executedChild,
-            keepDataAttributes
-          );
-        }
-        return getChild(child, executedChild, keepDataAttributes);
-      });
+      for (let x = 1; x <= Object.keys(iteration); x++) {
+        childrenPassed.push(childPassed);
+      }
     }
+    return childrenPassed.length ? childrenPassed : child;
   }
 
   return child;

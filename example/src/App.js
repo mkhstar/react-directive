@@ -31,7 +31,19 @@ export default class App extends Component {
                 </div>
               </div>
             </div>
+            <div data-react-for={5}>
+                Repeat 5 times
+            </div>
             <p data-react-for={5}>{val => 'val'}</p>
+            <div data-react-for={10}>
+              This is repeated 10 times
+              <div data-react-for={['musah', 'ahmet', 'emre']}>
+                {val => {
+                  return <span>His name is {val}</span>;
+                }}
+              </div>
+            </div>
+
             <p data-react-for={{ name: 'Musah', date: '20/1/55' }}>
               {(val, k, ind) => `${k}: ${val}`}
             </p>
@@ -51,7 +63,12 @@ export default class App extends Component {
                       data-react-for={['one', 'two']}
                     >
                       {(val, i) => {
-                        return <span key={i}>{val}</span>;
+                        return (
+                          <span key={i}>
+                            {val}
+                            <span data-react-for={[1, 2, 3]}>{n => n}</span>
+                          </span>
+                        );
                       }}
                     </span>
                   </span>
