@@ -7,6 +7,8 @@ export default class App extends Component {
       <div>
         <ReactDirective>
           <div className="App">
+          <div data-react-for={['Musah', 'Kusi', 'Hussein']}>{name => `His name is ${name}`}</div>
+
             <p>
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos,
               itaque.
@@ -18,7 +20,6 @@ export default class App extends Component {
                 Span <span data-react-if={false}>Dont render</span>
               </span>
             </div>
-
             <div>
               <p>
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla
@@ -44,7 +45,7 @@ export default class App extends Component {
               </div>
             </div>
 
-            <p data-react-for={{ name: 'Musah', date: '20/1/55' }}>
+            <p data-react-for={{ name: 'Musah', dateOfBirth: 'January, 1996' }}>
               {(val, k, ind) => `${k}: ${val}`}
             </p>
             <ul>

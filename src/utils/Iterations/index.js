@@ -2,10 +2,10 @@ const iterations = (child, keepDataAttributes) => {
   if (Array.isArray(child)) {
     return child.map(c => iterations(c, keepDataAttributes));
   }
-  if (child.props && child.props.hasOwnProperty('data-react-for')) {
+  if (child && child.props && child.props.hasOwnProperty('data-react-for')) {
     const iteration = child.props['data-react-for'];
     return getChildren(child, iteration, keepDataAttributes);
-  } else if (child.props && child.props.children) {
+  } else if (child && child.props && child.props.children) {
     return {
       ...child,
       props: {
@@ -70,7 +70,10 @@ const getChildren = (child, iteration, keepDataAttributes) => {
           child.props['data-react-for'] && keepDataAttributes
             ? child.props['data-react-for']
             : undefined,
-        children: iterations(childIterations.length ? childIterations : children, keepDataAttributes)
+        children: iterations(
+          childIterations.length ? childIterations : children,
+          keepDataAttributes
+        )
       }
     };
     const childrenPassed = [];
@@ -78,7 +81,7 @@ const getChildren = (child, iteration, keepDataAttributes) => {
       iteration.forEach(() => childrenPassed.push(childPassed));
     } else if (typeof iteration === 'number') {
       for (let x = 1; x <= iteration; x++) {
-        childrenPassed.push(childPassed)
+        childrenPassed.push(childPassed);
       }
     } else if (typeof iteration === 'object') {
       for (let x = 1; x <= Object.keys(iteration); x++) {
