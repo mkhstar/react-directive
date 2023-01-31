@@ -6,5 +6,6 @@ src/Playground.tsx
 jest.config.js
 tsconfig.json
 tsconfig.eslint.json
-eslintignore
+.eslintignore
 .babelrc
+.github
