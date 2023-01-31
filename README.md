@@ -28,7 +28,7 @@ To use `react-directive` import it to your component.
 import  React  from  'react';
 import  directive  from  'react-directive';
 
-const  MyComponent  =  props  =>  {
+const  Component  =  props  =>  {
 	return (
         // This is the same as a div element but has more features like dirIf, dirFor, extended className etc.
 		<directive.div>
@@ -36,8 +36,6 @@ const  MyComponent  =  props  =>  {
 		</directive.div>
 	);
 }
-
-export default MyComponent;
 ```
 
 # Conditional Rendering
@@ -61,7 +59,7 @@ The example component below renders a `div` element only if the name's length is
 import  React, { useState }  from  'react';
 import  directive  from  'react-directive';
 
-const  MyComponent  =  props  =>  {
+const  Component  =  props  =>  {
     const [currentName, setCurrentName] = useState('Musah');
 
 	return (
@@ -70,8 +68,6 @@ const  MyComponent  =  props  =>  {
 		</directive.div>
 	);
 }
-
-export default MyComponent;
 /*
 	When dirIf is truthy, it renders
 	<div>Div contents</div> 
@@ -97,7 +93,7 @@ The example component below shows a `div` element only if the name's length is g
 import  React, { useState }  from  'react';
 import  directive  from  'react-directive';
 
-const  MyComponent  =  props  =>  {
+const  Component  =  props  =>  {
     const [currentName, setCurrentName] = useState('Musah');
 
 	return (
@@ -106,8 +102,6 @@ const  MyComponent  =  props  =>  {
 		</directive.div>
 	);
 }
-
-export default MyComponent;
 /*
 	When dirShow is truthy, it renders
 	<div>Div contents</div> 
@@ -133,13 +127,13 @@ It is recommended to use the function version if the calculation is intensive. T
 import  React, { useState }  from  'react';
 import  { Switch, Case, Default }  from  'react-directive';
 
-const  MyComponent  =  props  =>  {
+const  Component  =  props  =>  {
     const [currentName, setCurrentName] = useState('Musah');
 
     // This makes it more concise to render an element instead of using nested ternary operator. 
     // Fun fact: I was getting lots of eslint problems because of using ternary operators which was one of my main motivations for building this library.
 	return (
-		<Switch>
+      <Switch>
           <Case when={!currentName.length}>
             <div>Case 1</div>
           </Case>
@@ -153,12 +147,9 @@ const  MyComponent  =  props  =>  {
           <Default>
             <div>Default</div>
           </Default>
-      </Switch>
-    );
-	);
+     </Switch>
+  );
 }
-
-export default MyComponent;
 /*
 	renders
     <div>Case 2</div>
@@ -220,7 +211,7 @@ function Component() {
 ```
 
 ## Prop `className`
-`react-directive` extends the default className of React to support what the `useClassName` hook support above. To pass the dependencies, use `classNameDeps` props.
+`react-directive` extends the default className of React to support what the `useClassName` hook supports above. To pass the dependencies, use `classNameDeps` props.
 
 Here are some basic examples:
 
@@ -277,6 +268,65 @@ function Component() {
 ```
 
 You might have noticed that we are passing a function. It is important to know that if you want the values of the elements in the list you passed, you must pass a function to be able to access them. This works like `<Context.Consumer />`. 
+
+## Prop `dirFor`
+`react-directive` includes a prop that takes an `array` of items you want to render. The children prop is a function or React node that is called for each item in the array. The function takes in two arguments: `currentItem` and `index`. `currentItem` is the current item in the `dirFor` array and `index` is its index in the array.
+
+Here is a basic example:
+
+```tsx
+import directive from 'react-directive';
+
+function Component() {
+  const items = ['Item 1', 'Item 2', 'Item 3'];
+
+  return (
+    <directive.div dirFor={items}>{(currentItem) => currentItem}</directive.div>
+  );
+}
+
+/* renders
+    <div>Item 1</div>
+    <div>Item 2</div>
+    <div>Item 3</div>
+*/
+```
+
+When a function is not passed as a child, it just renders the element the number of times of the length of the array. You can use the `keyExtractor` prop to specify the key to use. Otherwise it will just use the index as a fallback.
+
+
+# Other props
+
+## Prop `dirRef`
+The `dirRef` prop is used instead of the standard ref prop for directives. The `ref` prop will not work when using directives.
+
+Here is a basic example:
+
+```tsx
+import { useRef } from 'react';
+import directive from 'react-directive';
+
+function Component() {
+  const inputRef = useRef<HTMLInputElement>(null);
+  const focusInput = () => {
+    inputRef.current.focus();
+  }
+
+  return (
+    <React.Fragement> 
+      <directive.input placeholder="Name" dirRef={inputRef} />
+      <button onClick={focusInput}>Focus Input</button>
+    </React.Fragement>
+  );
+}
+
+/* renders
+    <div>Item 1</div>
+    <div>Item 2</div>
+    <div>Item 3</div>
+*/
+```
+
 
 # Pull Requests
 
