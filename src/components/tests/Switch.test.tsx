@@ -1,7 +1,9 @@
 import React from "react";
 import { render, cleanup } from "@testing-library/react";
 import { snapshotTest, truthyFalsyMap } from "../../helpers/test-helpers";
-import { Switch, Case, Default } from "../Switch";
+import { Switch } from "../Switch";
+import { Case } from "../Case";
+import { Default } from "../Default";
 
 afterEach(cleanup);
 

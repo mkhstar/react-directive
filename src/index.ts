@@ -1,8 +1,12 @@
 import directive from "./directives";
 
-export * as For from "./components/For";
+export * from "./components/For";
 
-export * as Switch from "./components/Switch";
+export * from "./components/Switch";
+
+export * from "./components/Case";
+
+export * from "./components/Default";
 
 export * from "./hooks/useClassName";
 

@@ -1,6 +1,10 @@
 import React from "react";
 import { ForProps } from "../types/for";
 
-export const For = <T,>({ each, children }: ForProps<T>) => (
-  <>{each.map((value, index) => children(value, index))}</>
-);
+export class For<T> extends React.Component<ForProps<T>> {
+  render() {
+    return this.props.each.map((value, index) =>
+      this.props.children(value, index)
+    );
+  }
+}

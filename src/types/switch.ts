@@ -1,12 +1,12 @@
-import { ReactElement } from "react";
+import React, { ReactElement } from "react";
 
 export interface CaseProps {
   when: any | (() => any);
-  children: JSX.Element;
+  children: React.ReactNode;
 }
 
 export interface DefaultProps {
-  children: JSX.Element;
+  children: React.ReactNode;
 }
 
 type SwitchChildrenProps = CaseProps | DefaultProps;

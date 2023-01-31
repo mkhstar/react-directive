@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import { CaseProps, DefaultProps, SwitchProps } from "../types/switch";
+import { SwitchProps } from "../types/switch";
 
 export const Switch: React.FC<SwitchProps> = ({ children }) => {
   let caseToRender: ReactNode | null = null;
@@ -20,9 +20,3 @@ export const Switch: React.FC<SwitchProps> = ({ children }) => {
 
   return caseToRender;
 };
-
-export const Case = ({ when, children }: CaseProps) => {
-  return when ? children : null;
-};
-
-export const Default = ({ children }: DefaultProps) => children;
