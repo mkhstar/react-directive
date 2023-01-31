@@ -1,6 +1,6 @@
 {
   "name": "react-directive",
-  "version": "2.0.0-beta.0",
+  "version": "2.0.0-beta.1",
   "description": "A conditional, className and listing directive for react apps",
   "repository": {
     "type": "git",

@@ -131,7 +131,7 @@ It is recommended to use the function version if the calculation is intensive. T
 
 ```jsx
 import  React, { useState }  from  'react';
-import  directive  from  'react-directive';
+import  { Switch, Case, Default }  from  'react-directive';
 
 const  MyComponent  =  props  =>  {
     const [currentName, setCurrentName] = useState('Musah');
@@ -153,8 +153,8 @@ const  MyComponent  =  props  =>  {
           <Default>
             <div>Default</div>
           </Default>
-        </Switch>
-      );
+      </Switch>
+    );
 	);
 }
 
@@ -241,7 +241,7 @@ function Component() {
 
 # List Rendering
 
-`react-directive` provides the directive `dirFor` and the component `<For />` to generate lists.
+`react-directive` provides the directive `dirFor` and the component `<For />` to generate lists. This makes it more readable than using `Array.prototype.map`.
 
 
 ## Usage
