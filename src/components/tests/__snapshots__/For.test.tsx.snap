@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<For /> snapshots matches the snapshot with an array of numbers 1`] = `
+[
+  <div>
+    1
+  </div>,
+  <div>
+    2
+  </div>,
+  <div>
+    3
+  </div>,
+]
+`;
+
+exports[`<For /> snapshots matches the snapshot with an array of strings 1`] = `
+[
+  <div>
+    a
+  </div>,
+  <div>
+    b
+  </div>,
+  <div>
+    c
+  </div>,
+]
+`;
+
+exports[`<For /> snapshots matches the snapshot with an empty array 1`] = `null`;
+
+exports[`<For /> snapshots passes the correct value and index to children 1`] = `
+[
+  <div>
+    Name: Musah, School Hacettepe, From Kumasi, Index: 0
+  </div>,
+  <div>
+    Name: Shakino, School Okess, From Oman, Index: 1
+  </div>,
+  <div>
+    Name: Sala, School UOEW, From Kumasi, Index: 2
+  </div>,
+]
+`;

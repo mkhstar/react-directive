@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Switch /> snapshots matches the snapshot with the default case 1`] = `
+<div>
+  Default case
+</div>
+`;
+
+exports[`<Switch /> snapshots matches the snapshot with the default case: No default case 1`] = `null`;
+
+exports[`<Switch /> snapshots matches the snapshot with the matching case 1`] = `
+<div>
+  Case 1
+</div>
+`;
+
+exports[`<Switch /> snapshots matches the snapshot with the matching case 2`] = `
+<div>
+  Case 2
+</div>
+`;
