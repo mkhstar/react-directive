@@ -1,7 +1,29 @@
 import React from "react";
 import { render } from "@testing-library/react";
-import { makeDirective } from "../makeDirective";
+import { getKey, makeDirective } from "../makeDirective";
 import { truthyValues, falsyValues } from "../../helpers/test-helpers";
+
+describe("getKey()", () => {
+  it("returns index when dirKey is not defined", () => {
+    expect(getKey(undefined, 0)).toBe(0);
+  });
+
+  it('returns passed item itself when dirKey is "this"', () => {
+    expect(getKey("item", 0, "this")).toBe("item");
+  });
+
+  it("returns value of dirKey property when dirKey is a string", () => {
+    const item = { id: 1 };
+    expect(getKey(item, 0, "id")).toBe("1");
+  });
+
+  it("returns result of calling the function when dirKey is a function", () => {
+    const item = { id: 1 };
+    const dirKey = jest.fn((i) => i.id);
+    expect(getKey(item, 0, dirKey)).toBe(1);
+    expect(dirKey).toHaveBeenCalledWith(item);
+  });
+});
 
 describe("makeDirective", () => {
   it("renders a component with the correct class name when dirIf is truthy", () => {
@@ -124,7 +146,7 @@ describe("makeDirective", () => {
     const { getAllByTestId, unmount } = render(
       <TestComponent
         dirFor={[{ id: 1 }, { id: 2 }]}
-        keyExtractor={(item) => item.id}
+        dirKey="id"
         data-testid="test-element"
       >
         Test Content

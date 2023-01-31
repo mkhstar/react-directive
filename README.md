@@ -272,6 +272,8 @@ You might have noticed that we are passing a function. It is important to know t
 ## Prop `dirFor`
 `react-directive` includes a prop that takes an `array` of items you want to render. The children prop is a function or React node that is called for each item in the array. The function takes in two arguments: `currentItem` and `index`. `currentItem` is the current item in the `dirFor` array and `index` is its index in the array.
 
+**Note**: Make sure to pass a unique key prop to the elements rendered by the children function using `dirKey` (More later). This is important for React to keep track of the elements and render updates efficiently. It fallsback to using the `index` of the item if not provided
+
 Here is a basic example:
 
 ```tsx
@@ -281,7 +283,8 @@ function Component() {
   const items = ['Item 1', 'Item 2', 'Item 3'];
 
   return (
-    <directive.div dirFor={items}>{(currentItem) => currentItem}</directive.div>
+    // this means the current item. Used because the items are unique. If they are not
+    <directive.div dirKey="this" dirFor={items}>{(currentItem) => currentItem}</directive.div>
   );
 }
 
@@ -292,10 +295,15 @@ function Component() {
 */
 ```
 
-When a function is not passed as a child, it just renders the element the number of times of the length of the array. You can use the `keyExtractor` prop to specify the key to use. Otherwise it will just use the index as a fallback.
-
 
 # Other props
+
+## Prop `dirKey`
+The `dirKey` prop is used to specify the key of the current element which is in the loop while using `dirFor`.
+  
+- It can take `this`, which means the current item should be used as a key. **Note**: use this for only primitive values that you know will be unique in the list.
+- It can take any other string. When any other string is specified, it will use that to find the index in the current item according to the name. It will assume that the current item is an object. If null or undefined is returned, it will fallback to the index
+- It can take in a function that returns the key
 
 ## Prop `dirRef`
 The `dirRef` prop is used instead of the standard ref prop for directives. The `ref` prop will not work when using directives.

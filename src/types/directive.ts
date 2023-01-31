@@ -1,9 +1,9 @@
 import { makeDirective } from "../directives/makeDirective";
 import { Classes, ClassesDependencies } from "./classes";
 
-export type DirectiveChildren<T> =
-  | ((currentItem: T, index: number) => React.ReactNode)
-  | React.ReactNode;
+export type Mapper<T> = (currentItem: T, index: number) => React.ReactNode;
+
+export type DirectiveChildren<T> = Mapper<T> | React.ReactNode;
 
 export interface DirectiveProps<T = undefined, E = undefined> {
   dirIf?: any;
@@ -15,9 +15,9 @@ export interface DirectiveProps<T = undefined, E = undefined> {
     E extends keyof HTMLElementTagNameMap ? HTMLElementTagNameMap[E] : any
   >;
   children?: T extends undefined ? React.ReactNode : DirectiveChildren<T>;
-  keyExtractor?: T extends undefined
+  dirKey?: T extends undefined
     ? never
-    : (currentItem: T) => string | number | null;
+    : string | ((currentItem: T) => string | number);
 }
 
 export type DirectiveMap = {

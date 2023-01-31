@@ -2,6 +2,18 @@ import React from "react";
 import { useClassName } from "../hooks/useClassName";
 import { DirectiveProps } from "../types/directive";
 
+export const getKey = (
+  item: any,
+  index: number,
+  dirKey?: string | ((currentItem: any) => string | number)
+): string | number => {
+  if (!(dirKey && item)) return index;
+  if (dirKey === "this") return item.toString();
+  if (typeof dirKey === "string")
+    return (item[dirKey] && item[dirKey].toString()) ?? index;
+  return dirKey(item);
+};
+
 export const makeDirective = <T extends keyof JSX.IntrinsicElements>(
   component: T
 ) => {
@@ -13,6 +25,7 @@ export const makeDirective = <T extends keyof JSX.IntrinsicElements>(
     dirShow = true,
     classNameDeps,
     dirFor,
+    dirKey,
     children,
     style,
     dirRef,
@@ -40,9 +53,12 @@ export const makeDirective = <T extends keyof JSX.IntrinsicElements>(
               component,
               {
                 ...props,
-                key: props.keyExtractor ? props.keyExtractor(item) : i,
+                ...extraProps,
+                key: getKey(item, i, dirKey),
               },
-              typeof children === "function" ? children(item, i) : children
+              typeof children === "function"
+                ? children(item, i)
+                : (children as React.ReactNode)
             )
           )
         )
