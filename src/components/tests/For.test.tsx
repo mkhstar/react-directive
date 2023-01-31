@@ -1,13 +1,19 @@
 import React from "react";
 import { render } from "@testing-library/react";
 import { snapshotTest } from "../../helpers/test-helpers";
-import For from "../For";
+import { For } from "../For";
 
 describe("<For />", () => {
   it("renders correct number of children", () => {
     const each = [1, 2, 3];
     const { queryAllByTestId } = render(
-      <For each={each}>{(value) => <div data-testid="child">{value}</div>}</For>
+      <For each={each}>
+        {(value) => (
+          <div key={value} data-testid="child">
+            {value}
+          </div>
+        )}
+      </For>
     );
 
     expect(queryAllByTestId("child").length).toBe(each.length);
@@ -16,7 +22,7 @@ describe("<For />", () => {
   it("renders children with correct values", () => {
     const each = [1, 2, 3];
     const { queryAllByText } = render(
-      <For each={each}>{(value) => <div>{value}</div>}</For>
+      <For each={each}>{(value) => <div key={value}>{value}</div>}</For>
     );
 
     each.forEach((value) => {
@@ -27,7 +33,7 @@ describe("<For />", () => {
   it("does not render anything if `each` is an empty array", () => {
     const each: Array<number> = [];
     const { queryAllByTestId } = render(
-      <For each={each}>{(value) => <div>{value}</div>}</For>
+      <For each={each}>{(value) => <div key={value}>{value}</div>}</For>
     );
 
     expect(queryAllByTestId("child").length).toBe(0);
@@ -35,14 +41,16 @@ describe("<For />", () => {
 
   it("passes the correct value and index to children", () => {
     const each = [
-      { name: "Musah", school: "Hacettepe", from: "Kumasi" },
-      { name: "Shakino", school: "Okess", from: "Oman" },
-      { name: "Sala", school: "UOEW", from: "Kumasi" },
+      { id: 1, name: "Musah", school: "Hacettepe", from: "Kumasi" },
+      { id: 2, name: "Shakino", school: "Okess", from: "Oman" },
+      { id: 3, name: "Sala", school: "UOEW", from: "Kumasi" },
     ];
     const { queryAllByText } = render(
       <For each={each}>
         {(value, index) => (
-          <div>{`Name: ${value.name}, School ${value.school}, From ${value.from}, Index: ${index}`}</div>
+          <div
+            key={value.id}
+          >{`Name: ${value.name}, School ${value.school}, From ${value.from}, Index: ${index}`}</div>
         )}
       </For>
     );
@@ -61,12 +69,12 @@ describe("<For />", () => {
     const { queryByTestId } = render(
       <For each={each}>
         {(value, index) => (
-          <>
+          <React.Fragment key={value.from}>
             <p data-testid="name">Name: {value.name}</p>
             <p data-testid="school">School: {value.school}</p>
             <p data-testid="from">From: {value.from}</p>
             <p data-testid="index">Index: {index}</p>
-          </>
+          </React.Fragment>
         )}
       </For>
     );
@@ -102,15 +110,17 @@ describe("<For /> snapshots", () => {
 
   it("passes the correct value and index to children", () => {
     const each = [
-      { name: "Musah", school: "Hacettepe", from: "Kumasi" },
-      { name: "Shakino", school: "Okess", from: "Oman" },
-      { name: "Sala", school: "UOEW", from: "Kumasi" },
+      { id: 1, name: "Musah", school: "Hacettepe", from: "Kumasi" },
+      { id: 2, name: "Shakino", school: "Okess", from: "Oman" },
+      { id: 3, name: "Sala", school: "UOEW", from: "Kumasi" },
     ];
 
     snapshotTest(
       <For each={each}>
         {(value, index) => (
-          <div>{`Name: ${value.name}, School ${value.school}, From ${value.from}, Index: ${index}`}</div>
+          <div
+            key={value.id}
+          >{`Name: ${value.name}, School ${value.school}, From ${value.from}, Index: ${index}`}</div>
         )}
       </For>
     );

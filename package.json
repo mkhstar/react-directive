@@ -10,7 +10,9 @@
   "scripts": {
     "build": "rm -rf ./dist && tsc",
     "prepublishOnly": "npm run build",
-    "test": "jest --verbose --coverage --coverageDirectory='coverage'",
+    "test-only": "jest",
+    "test": "jest --verbose --coverage",
+    "test-output": "jest --verbose --coverage --coverageDirectory='coverage'",
     "test:watch": "jest --verbose --watch",
     "lint-fix": "eslint --fix src/.",
     "lint": "eslint src/."
@@ -59,8 +61,7 @@
     "typescript": "^4.9.4"
   },
   "peerDependencies": {
-    "react": ">=16.8.0",
-    "react-dom": ">=16.8.0"
+    "react": ">=16.8.0"
   },
   "browserslist": [
     ">0.2%",

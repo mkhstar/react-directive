@@ -11,7 +11,8 @@ export const getKey = (
   if (dirKey === "this") return item.toString();
   if (typeof dirKey === "string")
     return (item[dirKey] && item[dirKey].toString()) ?? index;
-  return dirKey(item);
+  if (typeof dirKey === "function") return dirKey(item);
+  return index;
 };
 
 export const makeDirective = <T extends keyof JSX.IntrinsicElements>(

@@ -1,3 +1,4 @@
+import React from "react";
 import { makeDirective } from "../directives/makeDirective";
 import { Classes, ClassesDependencies } from "./classes";
 

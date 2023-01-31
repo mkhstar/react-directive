@@ -23,6 +23,10 @@ describe("getKey()", () => {
     expect(getKey(item, 0, dirKey)).toBe(1);
     expect(dirKey).toHaveBeenCalledWith(item);
   });
+
+  it("returns index if any other type of value is passed as key", () => {
+    expect(getKey({}, 0, 4 as any)).toBe(0);
+  });
 });
 
 describe("makeDirective", () => {
@@ -147,6 +151,23 @@ describe("makeDirective", () => {
       <TestComponent
         dirFor={[{ id: 1 }, { id: 2 }]}
         dirKey="id"
+        data-testid="test-element"
+      >
+        Test Content
+      </TestComponent>
+    );
+
+    const elements = getAllByTestId("test-element");
+    expect(elements).toHaveLength(2);
+    unmount();
+  });
+
+  it("renders a component when dirFor is present using dirKey function", () => {
+    const TestComponent = makeDirective("div");
+    const { getAllByTestId, unmount } = render(
+      <TestComponent
+        dirFor={[{ id: 1 }, { id: 2 }]}
+        dirKey={(value) => value.id}
         data-testid="test-element"
       >
         Test Content
