@@ -332,7 +332,7 @@ function Component() {
 
 # Pull Requests
 
-Pull requests are welcome. Open pull requests to the pr branch and make sure it all lint and tests are passing.
+Pull requests are welcome. Open pull requests to the develop branch and make sure it all lint and tests are passing.
 
 # License
 
