@@ -9,5 +9,4 @@ tsconfig.eslint.json
 .eslintignore
 .babelrc
 .github
-CODE_OF_CONDUCT.md
 LICENSE
