@@ -28,7 +28,7 @@ To use `react-directive` import it to your component.
 import  React  from  'react';
 import  directive  from  'react-directive';
 
-const  Component  =  props  =>  {
+const  Component  = () =>  {
 	return (
         // This is the same as a div element but has more features like dirIf, dirFor, extended className etc.
 		<directive.div>
@@ -59,7 +59,7 @@ The example component below renders a `div` element only if the name's length is
 import  React, { useState }  from  'react';
 import  directive  from  'react-directive';
 
-const  Component  =  props  =>  {
+const  Component  = () =>  {
     const [currentName, setCurrentName] = useState('Musah');
 
 	return (
@@ -93,7 +93,7 @@ The example component below shows a `div` element only if the name's length is g
 import  React, { useState }  from  'react';
 import  directive  from  'react-directive';
 
-const  Component  =  props  =>  {
+const  Component = () =>  {
     const [currentName, setCurrentName] = useState('Musah');
 
 	return (
@@ -225,7 +225,7 @@ function Component() {
 
   return <directive.div className={{isActive, isDisabled}} classNameDeps={[isActive, isDisabled]}  >Contents</directive.div>;
 }
-// Renders <div class="active">Contents</div>
+// Renders <div class="isActive">Contents</div>
 // classNameDeps is optional but makes it more efficient and performant.
 ```
 
@@ -327,18 +327,12 @@ function Component() {
     </React.Fragement>
   );
 }
-
-/* renders
-    <div>Item 1</div>
-    <div>Item 2</div>
-    <div>Item 3</div>
-*/
 ```
 
 
 # Pull Requests
 
-Pull requests are welcome. Open pull requests to the pr branch and make sure it all lint and tests are passing.
+Pull requests are welcome. Open pull requests to the develop branch and make sure it all lint and tests are passing.
 
 # License
 

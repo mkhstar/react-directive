@@ -9,3 +9,4 @@ tsconfig.eslint.json
 .eslintignore
 .babelrc
 .github
+LICENSE
