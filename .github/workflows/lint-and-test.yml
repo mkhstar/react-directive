@@ -2,9 +2,9 @@ name: Lint and Test
 
 on:
   push:
-    branches: [ master, develop ]
+    branches: [ master, develop, dependencies ]
   pull_request:
-    branches: [ master, develop ]
+    branches: [ master, develop, dependencies ]
 
 jobs:
   build:
